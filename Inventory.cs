@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Inventory : MonoBehaviour {
@@ -37,6 +37,55 @@ public class Inventory : MonoBehaviour {
                 Debug.Log(Currency + " Credits" );
             
         }
+
+    }
+
+
+//Problem occurs after here array is skiping one and wont check to make sure that collision.gameobject.name is not a value allready
+    void OnCollisionEnter(Collision collision)
+    {
+        
+
+        if(string.IsNullOrEmpty(Items[19]))
+        {
+            for (int i = 0; i <= 19; i++)
+            {
+                Debug.Log("1");
+                if(string.IsNullOrEmpty(Items[i]) && Items[i] != collision.gameObject.name)
+                {
+                    Debug.Log("2");
+                    Items[i] = collision.gameObject.name;
+                    return;
+                }
+                else
+                {
+                    Debug.Log("3");
+                    i += 1;
+                }
+
+
+
+
+            }
+
+        }
+        else
+        {
+
+            Debug.Log("Inventory full");
+            Debug.Log("Can't collect " + collision.gameObject.name);
+            Debug.Log(Items[19]);
+
+        }
+
+
+
+
+
+
+
+
+
 
     }
 }
